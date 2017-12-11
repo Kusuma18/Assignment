@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Payment</title>
+    <meta charset="utf-8" />
+    <script src="../scripts/angular.js"></script>
+
+    <script src="../Controller/index.js"></script>
+
+    <script src="../Controller/invoice2.js"></script>
+    <script src="../scripts/Chart.js"></script>
+    <script src="../scripts/angular-chart.min.js"></script>
+    <script src="../scripts/tc-angular-chartjs.min.js"></script>
+    <script src="../Controller/BarCtrl.js"></script>
+
+</head>
+<body ng-app="invoice" ng-controller="InvoiceController as Invoice">
+    
+    <div>
+        
+        <select ng-model="Invoice.InCurr">
+            <option ng-repeat="c in Invoice.currencies">{{c}}</option>
+        </select>
+    </div>
+    <div>
+        <b>Rate:</b>
+        <span>
+            {{Invoice.rates(Invoice.InCurr) | currency:c}}
+        </span><br>
+        
+        <button class="btn" ng-click="Invoice.currencyCalling()">LoadCurrency</button>
+    </div>
+    <div>
+        <canvas id="myChart" width="10" height="20" style="width:100px;height:200px !important"></canvas>
+    </div>
+    <div ng-controller="BarCtrl">
+        <canvas id="bar" class="chart chart-bar"
+                chart-data="data" chart-labels="labels">
+            chart-series="series"
+        </canvas>
+    </div>
+</body>
+</html>
